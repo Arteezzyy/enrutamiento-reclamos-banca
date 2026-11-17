@@ -1,0 +1,106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Marca */
+    --color-primary: #0b2545;
+    --color-primary-light: #13315c;
+    --color-accent: #1b998b;
+    --color-gold: #c9a227;
+
+    /* Neutros */
+    --bg-app: #f5f7fa;
+    --bg-surface: #ffffff;
+    --border: #e3e8ef;
+    --text: #1a2433;
+    --text-muted: #5b6b7f;
+
+    /* Estados */
+    --status-new-bg: #e6eef9;
+    --status-new: #2f6fde;
+    --status-progress-bg: #fff4db;
+    --status-progress: #b7791f;
+    --status-urgent-bg: #fde8e8;
+    --status-urgent: #d64545;
+    --status-done-bg: #e3f6ec;
+    --status-done: #1e8e5a;
+    --status-closed-bg: #edf0f4;
+    --status-closed: #6b7a8f;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-app font-sans text-ink antialiased;
+    background-image: radial-gradient(circle at 100% 0%, rgba(27, 153, 139, 0.07), transparent 42%);
+    background-attachment: fixed;
+  }
+
+  ::selection {
+    background-color: rgba(27, 153, 139, 0.22);
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #c6cfdb transparent;
+  }
+
+  *::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #c6cfdb;
+    border-radius: 9999px;
+    border: 3px solid transparent;
+    background-clip: content-box;
+  }
+}
+
+@layer components {
+  .card {
+    @apply rounded-2xl border border-line bg-white shadow-card;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-accent/25 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-accent/25 disabled:cursor-not-allowed disabled:opacity-50 bg-accent text-white shadow-[0_12px_24px_-14px_rgba(27,153,139,0.9)] hover:bg-accent-dark hover:shadow-[0_16px_30px_-14px_rgba(27,153,139,0.85)] active:scale-[0.99];
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-line bg-white px-3.5 py-2 text-sm font-semibold text-ink transition-colors hover:border-navy/20 hover:bg-[#F8FAFC] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-accent/20 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide;
+  }
+
+  .input {
+    @apply w-full rounded-xl border border-line bg-[#FAFBFD] px-4 py-3 text-[15px] text-ink outline-none transition placeholder:text-muted/60 focus:border-accent focus:bg-white focus:ring-4 focus:ring-accent/15;
+  }
+
+  .th {
+    @apply whitespace-nowrap px-4 py-3 text-left text-[11px] font-bold uppercase tracking-[0.08em] text-muted;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}

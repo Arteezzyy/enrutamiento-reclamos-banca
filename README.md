@@ -1,6 +1,6 @@
 # 🏦 Sistema de Enrutamiento Inteligente de Reclamos Bancarios
 
-Sistema de clasificación y enrutamiento automático de reclamos de banca móvil basado en **aprendizaje supervisado** y **optimización matemática**. Desarrollado como trabajo de la materia de Inteligencia Artificial — 1° Avance.
+Sistema de clasificación y enrutamiento automático de reclamos de banca móvil basado en **aprendizaje supervisado** y **optimización matemática**. Desarrollado como trabajo de la materia de Inteligencia Artificial.
 
 ---
 
@@ -33,6 +33,17 @@ Desarrollar un sistema supervisado de enrutamiento inteligente que procese autom
 Con el fin de reducir el tiempo de redistribución manual y optimizar la atención operativa.
 
 ---
+
+## ✨ Mejoras implementadas
+
+- **Dataset de 150 reclamos balanceados**: 50 por área (Soporte Técnico, Gerencia de Operaciones/Riesgo, Atención al Cliente) y 50 por prioridad (Alta, Media, Baja).
+- **Componentes del frontend rediseñados**: nueva interfaz con Sidebar institucional, `VistaClasificar`, `VistaLista`, `VistaAsignar`, `ResultadoClasificacion` y `TablaAsignaciones`, usando la paleta de colores institucional (azul marino, teal, dorado) y tipografía Inter.
+- **Métricas reales con validación cruzada 5-fold**: evaluación estratificada del modelo (área y prioridad) guardada en `backend/metricas.json`.
+- **Persistencia en SQLite**: historial de reclamos guardado en `backend/datos/reclamos.db`, sobreviviente a reinicios de la API.
+- **Endpoint `/metrica`**: expone las métricas de entrenamiento y validación desde la API.
+
+---
+
 
 ## 📊 Dataset de Entrenamiento
 
@@ -268,12 +279,20 @@ enrutamiento-reclamos-banca/
     ├── postcss.config.js
     └── src/
         ├── main.jsx
+        ├── index.css          # Tailwind + paleta institucional
         ├── App.jsx
+        ├── lib/
+        │   └── ui.js          # Colores, badges y formateo compartido
         ├── services/
-        │   └── api.js       # Llamadas al backend
+        │   └── api.js         # Llamadas al backend
         └── components/
+            ├── Sidebar.jsx
+            ├── VistaClasificar.jsx
+            ├── VistaLista.jsx
+            ├── VistaAsignar.jsx
             ├── FormularioReclamo.jsx
-            └── TablaReclamos.jsx
+            ├── ResultadoClasificacion.jsx
+            └── TablaAsignaciones.jsx
 ```
 
 ---
@@ -311,12 +330,51 @@ O comprime manualmente la carpeta `enrutamiento-reclamos-banca` en formato `.zip
 
 ---
 
-## ✅ Avance actual (1° Entrega)
+## ✅ Estado actual del proyecto
 
 - [x] Dataset de 150 reclamos etiquetados (área + prioridad)
 - [x] Modelo ML entrenado con TF-IDF y Regresión Logística
-- [x] Métricas de accuracy y F1-score
+- [x] Métricas de accuracy y F1-score (validación cruzada 5-fold)
 - [x] API REST con FastAPI
-- [x] Módulo de optimización con PuLP
+- [x] Módulo de optimización con PuLP (programación lineal entera)
 - [x] Frontend en React + Tailwind CSS
 - [x] Pruebas funcionales: clasificación, lista y asignación óptima
+- [x] Persistencia en SQLite (`backend/datos/reclamos.db`)
+- [x] Endpoint `/metrica` con métricas de entrenamiento
+
+## 📊 Métricas reales del modelo (entrenamiento con 150 reclamos)
+
+Generadas con `backend/entrenar.py` y guardadas en `backend/metricas.json`:
+
+| Tarea | Accuracy (CV 5-fold) | F1 macro (CV 5-fold) | Accuracy (holdout 20 %) | F1 macro (holdout 20 %) |
+|-------|----------------------|----------------------|-------------------------|-------------------------|
+| Área  | 0.713 ± 0.120 | 0.706 ± 0.129 | 0.700 | 0.703 |
+| Prioridad | 0.580 ± 0.096 | 0.578 ± 0.088 | 0.667 | 0.657 |
+
+> Nota: el área se predice aceptablemente; la prioridad está cerca del azar (3 clases, azar ≈ 33 %). Esto se debe al tamaño reducido del dataset (150 ejemplos sintéticos) y al desbalance histórico entre áreas y prioridades.
+
+## 🧠 Optimización (PuLP + CBC)
+
+La asignación minimiza una función de costo que combina:
+
+- **Probabilidad del modelo ML** por área (`α = 1.0`)
+- **Costo base operativo** por área (`β = 0.1`)
+- **Penalización por desviar** del área predicha según prioridad: Alta 0.6, Media 0.3, Baja 0.1 (`γ`)
+
+Restricciones: cada reclamo a un área; capacidad máxima por área (Soporte 50, Gerencia 30, Atención 40). Se valida factibilidad antes de devolver resultados.
+
+## 📈 Evaluación de impacto (First Routing Time)
+
+Generada con `backend/evaluacion.py` y guardada en `backend/evaluacion_impacto.json`:
+
+| Métrica | Proceso manual | Proceso automatizado | Impacto |
+|---------|---------------|---------------------|---------|
+| Tiempo total (150 reclamos) | ~148.93 horas-hombre | ~0.30 horas-hombre | 99.8 % ahorro |
+| Tiempo promedio por reclamo | ~0.9929 horas | ~0.0020 horas | 496× más rápido |
+
+> Los tiempos del proceso manual son estimaciones operativas (horas-hombre para derivar un reclamo según prioridad).
+
+## 🛠️ Scripts adicionales
+
+- `backend/entrenar.py` — Entrena, busca hiperparámetros (GridSearchCV), evalúa con CV 5-fold y holdout, guarda modelos y métricas.
+- `backend/evaluacion.py` — Simula First Routing Time manual vs. automatizado y guarda el reporte de impacto.

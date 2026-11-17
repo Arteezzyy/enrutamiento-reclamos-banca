@@ -1,0 +1,193 @@
+{
+  "generado": "2026-11-17T00:00:44",
+  "dataset": {
+    "total": 150,
+    "areas": {
+      "Soporte Tecnico": 50,
+      "Atencion al Cliente": 50,
+      "Gerencia de Operaciones/Riesgo": 50
+    },
+    "prioridades": {
+      "Alta": 50,
+      "Media": 50,
+      "Baja": 50
+    },
+    "matriz_area_prioridad": {
+      "Soporte Tecnico": {
+        "Media": 20,
+        "Alta": 19,
+        "Baja": 11
+      },
+      "Atencion al Cliente": {
+        "Baja": 22,
+        "Media": 19,
+        "Alta": 9
+      },
+      "Gerencia de Operaciones/Riesgo": {
+        "Alta": 22,
+        "Baja": 17,
+        "Media": 11
+      }
+    },
+    "duplicados": 0,
+    "longitud_media_texto": 54.49
+  },
+  "modelo": {
+    "area": {
+      "tfidf_params": {
+        "ngram_range": [
+          1,
+          2
+        ],
+        "min_df": 1
+      },
+      "modelo_params": {
+        "C": 1.0
+      },
+      "busqueda": {
+        "mejor_f1_macro_cv": 0.7064355921967983
+      },
+      "cv": {
+        "accuracy": {
+          "media": 0.7133333333333333,
+          "std": 0.12036980056845195
+        },
+        "precision_macro": {
+          "media": 0.7181980981980982,
+          "std": 0.12850414139277685
+        },
+        "recall_macro": {
+          "media": 0.7133333333333333,
+          "std": 0.1203698005684519
+        },
+        "f1_macro": {
+          "media": 0.7064355921967983,
+          "std": 0.12919610187148986
+        },
+        "f1_weighted": {
+          "media": 0.7064355921967984,
+          "std": 0.1291961018714898
+        }
+      },
+      "holdout": {
+        "muestra": 30,
+        "accuracy": 0.7,
+        "precision_macro": 0.7129629629629629,
+        "recall_macro": 0.6999999999999998,
+        "f1_macro": 0.7033492822966507,
+        "f1_weighted": 0.7033492822966508,
+        "reporte": {
+          "Atencion al Cliente": {
+            "precision": 0.6666666666666666,
+            "recall": 0.6,
+            "f1-score": 0.631578947368421,
+            "support": 10.0
+          },
+          "Gerencia de Operaciones/Riesgo": {
+            "precision": 0.5833333333333334,
+            "recall": 0.7,
+            "f1-score": 0.6363636363636365,
+            "support": 10.0
+          },
+          "Soporte Tecnico": {
+            "precision": 0.8888888888888888,
+            "recall": 0.8,
+            "f1-score": 0.8421052631578948,
+            "support": 10.0
+          },
+          "accuracy": 0.7,
+          "macro avg": {
+            "precision": 0.7129629629629629,
+            "recall": 0.6999999999999998,
+            "f1-score": 0.7033492822966507,
+            "support": 30.0
+          },
+          "weighted avg": {
+            "precision": 0.712962962962963,
+            "recall": 0.7,
+            "f1-score": 0.7033492822966508,
+            "support": 30.0
+          }
+        }
+      }
+    },
+    "prioridad": {
+      "tfidf_params": {
+        "ngram_range": [
+          1,
+          2
+        ],
+        "min_df": 2
+      },
+      "modelo_params": {
+        "C": 5.0
+      },
+      "busqueda": {
+        "mejor_f1_macro_cv": 0.6081836051805093
+      },
+      "cv": {
+        "accuracy": {
+          "media": 0.5799999999999998,
+          "std": 0.09568466729604881
+        },
+        "precision_macro": {
+          "media": 0.5966274466274466,
+          "std": 0.09199855161155815
+        },
+        "recall_macro": {
+          "media": 0.5800000000000001,
+          "std": 0.09568466729604883
+        },
+        "f1_macro": {
+          "media": 0.5781202551057175,
+          "std": 0.0882776050767933
+        },
+        "f1_weighted": {
+          "media": 0.5781202551057175,
+          "std": 0.0882776050767933
+        }
+      },
+      "holdout": {
+        "muestra": 30,
+        "accuracy": 0.6666666666666666,
+        "precision_macro": 0.6555555555555556,
+        "recall_macro": 0.6666666666666666,
+        "f1_macro": 0.6572390572390573,
+        "f1_weighted": 0.6572390572390572,
+        "reporte": {
+          "Alta": {
+            "precision": 0.8,
+            "recall": 0.8,
+            "f1-score": 0.8000000000000002,
+            "support": 10.0
+          },
+          "Baja": {
+            "precision": 0.6666666666666666,
+            "recall": 0.8,
+            "f1-score": 0.7272727272727272,
+            "support": 10.0
+          },
+          "Media": {
+            "precision": 0.5,
+            "recall": 0.4,
+            "f1-score": 0.4444444444444445,
+            "support": 10.0
+          },
+          "accuracy": 0.6666666666666666,
+          "macro avg": {
+            "precision": 0.6555555555555556,
+            "recall": 0.6666666666666666,
+            "f1-score": 0.6572390572390573,
+            "support": 30.0
+          },
+          "weighted avg": {
+            "precision": 0.6555555555555554,
+            "recall": 0.6666666666666666,
+            "f1-score": 0.6572390572390572,
+            "support": 30.0
+          }
+        }
+      }
+    }
+  }
+}

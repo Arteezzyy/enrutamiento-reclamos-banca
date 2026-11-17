@@ -1,25 +1,49 @@
-import { useState, useEffect } from 'react'
-import { plus, list, users, truck, alertTriangle, checkCircle2, calendar } from 'lucide-react'
+import { useEffect, useMemo, useState } from 'react'
+import { AlertTriangle, CheckCircle2, RefreshCw, X } from 'lucide-react'
 import {
   clasificarReclamo,
   asignarReclamos,
   listarReclamos,
   obtenerInfo,
 } from './services/api.js'
-import FormularioReclamo from './components/FormularioReclamo.jsx'
-import TablaReclamos from './components/TablaReclamos.jsx'
+import Sidebar from './components/Sidebar.jsx'
+import VistaClasificar from './components/VistaClasificar.jsx'
+import VistaLista from './components/VistaLista.jsx'
+import VistaAsignar from './components/VistaAsignar.jsx'
+import { areaMeta, prioridadMeta } from './lib/ui.js'
+
+const SECCIONES = {
+  clasificar: {
+    eyebrow: 'Recepción',
+    title: 'Nuevo reclamo',
+    desc: 'Clasifica el reclamo por área y prioridad con el modelo de IA.',
+  },
+  lista: {
+    eyebrow: 'Seguimiento',
+    title: 'Historial de reclamos',
+    desc: 'Consulta los reclamos clasificados y su estado operativo.',
+  },
+  asignar: {
+    eyebrow: 'Optimización',
+    title: 'Asignación óptima',
+    desc: 'Distribuye los reclamos entre áreas con PuLP.',
+  },
+}
 
 export default function App() {
   const [reclamos, setReclamos] = useState([])
   const [info, setInfo] = useState(null)
   const [loading, setLoading] = useState(false)
-  const [activeTab, setActiveTab] = useState('clasificar')
+  const [activeTab, setActiveTab] = useState(() => {
+    if (typeof window === 'undefined') return 'clasificar'
+    const hash = window.location.hash.replace('#', '')
+    return Object.prototype.hasOwnProperty.call(SECCIONES, hash) ? hash : 'clasificar'
+  })
   const [asignaciones, setAsignaciones] = useState([])
+  const [ultimoResultado, setUltimoResultado] = useState(null)
   const [mensaje, setMensaje] = useState(null)
 
-  useEffect(() => {
-    cargarDatos()
-  }, [])
+  const seccion = SECCIONES[activeTab]
 
   const cargarDatos = async () => {
     try {
@@ -33,18 +57,38 @@ export default function App() {
       console.error('Error cargando datos:', error)
       setMensaje({
         tipo: 'error',
-        texto: 'No se pudo conectar con el backend. ¿Está corriendo en localhost:8000?',
+        texto: 'No se pudo conectar con el backend. Verifica que esté corriendo en localhost:8000.',
       })
     }
   }
+
+  useEffect(() => {
+    cargarDatos()
+  }, [])
+
+  useEffect(() => {
+    if (!mensaje) return undefined
+    const temporizador = setTimeout(() => setMensaje(null), 7000)
+    return () => clearTimeout(temporizador)
+  }, [mensaje])
 
   const manejarClasificacion = async (texto) => {
     setLoading(true)
     setMensaje(null)
     try {
       const resultado = await clasificarReclamo(texto)
-      setReclamos([resultado, ...reclamos])
-      setMensaje({ tipo: 'exito', texto: `Reclamo clasificado: ${resultado.area} / ${resultado.prioridad}` })
+      setReclamos((previos) => [
+        { ...resultado, fecha: resultado.fecha ?? new Date().toISOString() },
+        ...previos,
+      ])
+      setUltimoResultado(resultado)
+      setAsignaciones([])
+      setMensaje({
+        tipo: 'exito',
+        texto: `Reclamo clasificado en ${areaMeta(resultado.area).label} con prioridad ${
+          prioridadMeta(resultado.prioridad).label
+        }.`,
+      })
     } catch (error) {
       setMensaje({ tipo: 'error', texto: error.message })
     } finally {
@@ -54,21 +98,27 @@ export default function App() {
 
   const manejarAsignacion = async () => {
     if (reclamos.length === 0) {
-      setMensaje({ tipo: 'error', texto: 'No hay reclamos para asignar' })
+      setMensaje({ tipo: 'error', texto: 'No hay reclamos para asignar.' })
       return
     }
     setLoading(true)
+    setMensaje(null)
     try {
-      const reclamosParaAsignar = reclamos.map((r) => ({
-        id: r.id,
-        texto: r.texto,
-        area_predicha: r.area,
-        prioridad: r.prioridad,
-        probabilidad_area: 0.85,
+      const reclamosParaAsignar = reclamos.map((reclamo) => ({
+        id: reclamo.id,
+        texto: reclamo.texto,
+        area_predicha: reclamo.area,
+        prioridad: reclamo.prioridad,
+        probabilidad_area: reclamo.probabilidades_area?.[reclamo.area] ?? 0.85,
       }))
       const resultado = await asignarReclamos(reclamosParaAsignar)
       setAsignaciones(resultado)
-      setMensaje({ tipo: 'exito', texto: `${resultado.length} reclamos asignados óptimamente` })
+      setMensaje({
+        tipo: 'exito',
+        texto: `${resultado.length} reclamo${resultado.length === 1 ? '' : 's'} asignado${
+          resultado.length === 1 ? '' : 's'
+        } de forma óptima.`,
+      })
       setActiveTab('asignar')
     } catch (error) {
       setMensaje({ tipo: 'error', texto: error.message })
@@ -77,203 +127,130 @@ export default function App() {
     }
   }
 
+  const cambiarTab = (tab) => {
+    setActiveTab(tab)
+    if (typeof window !== 'undefined') {
+      window.history.replaceState(null, '', `#${tab}`)
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+  }
+
   const cerrarMensaje = () => setMensaje(null)
 
-  return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-blue-800 text-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 py-6">
-          <div className="flex items-center gap-3 mb-2">
-            <div className="w-10 h-10 bg-blue-400 rounded-lg flex items-center justify-center">
-              <truck className="w-6 h-6 text-white" />
-            </div>
-            <h1 className="text-xl font-bold">Enrutamiento de Reclamos Bancarios</h1>
-          </div>
-          <p className="text-blue-100 text-sm">
-            Sistema inteligente de clasificación y enrutamiento por área y prioridad
-          </p>
-        </div>
-      </header>
+  const anioActual = useMemo(() => new Date().getFullYear(), [])
+  const esExito = mensaje?.tipo === 'exito'
 
-      {/* Mensajes */}
+  return (
+    <div className="min-h-screen lg:flex">
+      <Sidebar activeTab={activeTab} onChange={cambiarTab} reclamos={reclamos} />
+
+      <div className="flex min-w-0 flex-1 flex-col">
+        <header className="sticky top-0 z-10 border-b border-line/80 bg-app/85 backdrop-blur-xl">
+          <div className="mx-auto flex w-full max-w-[1440px] flex-wrap items-center gap-3 px-4 py-4 sm:px-6 lg:px-8">
+            <div className="mr-auto min-w-0">
+              <p className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-accent">
+                <span className="h-1 w-1 rounded-full bg-gold" />
+                {seccion.eyebrow}
+              </p>
+              <h1 className="mt-0.5 truncate font-sans text-xl font-semibold tracking-tight text-navy sm:text-2xl">
+                {seccion.title}
+              </h1>
+              <p className="mt-0.5 hidden truncate text-xs text-muted sm:block">{seccion.desc}</p>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <span
+                className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-[11px] font-semibold ${
+                  info
+                    ? 'border-[#1E8E5A]/20 bg-[#E3F6EC] text-[#1E8E5A]'
+                    : 'border-[#D64545]/20 bg-[#FDE8E8] text-[#D64545]'
+                }`}
+              >
+                <span className={`h-1.5 w-1.5 rounded-full ${info ? 'bg-[#1E8E5A]' : 'bg-[#D64545]'}`} />
+                {info ? 'API conectada' : 'Sin conexión'}
+              </span>
+              <button
+                type="button"
+                onClick={cargarDatos}
+                title="Actualizar datos"
+                className="btn-ghost px-3 py-2"
+              >
+                <RefreshCw className="h-4 w-4 text-muted" />
+                <span className="hidden sm:inline">Actualizar</span>
+              </button>
+            </div>
+          </div>
+        </header>
+
+        <main className="mx-auto w-full max-w-[1440px] flex-1 px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
+          {activeTab === 'clasificar' && (
+            <VistaClasificar
+              onSubmit={manejarClasificacion}
+              loading={loading}
+              ultimoResultado={ultimoResultado}
+              onVerHistorial={() => cambiarTab('lista')}
+              info={info}
+            />
+          )}
+
+          {activeTab === 'lista' && (
+            <VistaLista reclamos={reclamos} onClasificar={() => cambiarTab('clasificar')} />
+          )}
+
+          {activeTab === 'asignar' && (
+            <VistaAsignar
+              reclamos={reclamos}
+              asignaciones={asignaciones}
+              onAsignar={manejarAsignacion}
+              loading={loading}
+              info={info}
+            />
+          )}
+        </main>
+
+        <footer className="mt-auto border-t border-line bg-white/70">
+          <div className="mx-auto flex w-full max-w-[1440px] flex-col items-center justify-between gap-2 px-4 py-4 text-xs text-muted sm:flex-row sm:px-6 lg:px-8">
+            <p>Ingeniería de Sistemas · Universidad Mayor de San Simón</p>
+            <p className="flex flex-wrap items-center justify-center gap-2">
+              <span>Sistema</span>
+              <span className="h-1 w-1 rounded-full bg-line" />
+              <span>TF-IDF + Regresión Logística · PuLP</span>
+              <span className="h-1 w-1 rounded-full bg-line" />
+              <span>{anioActual}</span>
+            </p>
+          </div>
+        </footer>
+      </div>
+
       {mensaje && (
-        <div className="max-w-7xl mx-auto px-4 mb-4">
-          <div
-            className={`p-4 rounded-lg flex items-start gap-3 ${
-              mensaje.tipo === 'exito'
-                ? 'bg-green-100 border border-green-400 text-green-800'
-                : 'bg-red-100 border border-red-400 text-red-800'
-            }`}
-          >
-            {mensaje.tipo === 'exito' ? (
-              <checkCircle2 className="w-5 h-5 mt-0.5 shrink-0" />
-            ) : (
-              <alertTriangle className="w-5 h-5 mt-0.5 shrink-0" />
-            )}
-            <span className="text-sm">{mensaje.texto}</span>
-            <button
-              onClick={cerrarMensaje}
-              className="ml-auto text-sm hover:underline"
+        <div className="fixed bottom-5 right-5 z-50 w-[calc(100%-2.5rem)] max-w-sm animate-slide-up">
+          <div className="flex items-start gap-3 rounded-2xl border border-line bg-white p-4 shadow-lift">
+            <div
+              className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl ${
+                esExito ? 'bg-[#E3F6EC] text-[#1E8E5A]' : 'bg-[#FDE8E8] text-[#D64545]'
+              }`}
             >
-              Cerrar
+              {esExito ? (
+                <CheckCircle2 className="h-5 w-5" />
+              ) : (
+                <AlertTriangle className="h-5 w-5" />
+              )}
+            </div>
+            <div className="min-w-0 flex-1">
+              <p className="text-sm font-bold text-navy">{esExito ? 'Operación completada' : 'Ocurrió un problema'}</p>
+              <p className="mt-0.5 text-sm leading-snug text-muted">{mensaje.texto}</p>
+            </div>
+            <button
+              type="button"
+              onClick={cerrarMensaje}
+              aria-label="Cerrar mensaje"
+              className="rounded-md p-1 text-muted/70 transition-colors hover:bg-line/60 hover:text-ink"
+            >
+              <X className="h-4 w-4" />
             </button>
           </div>
         </div>
       )}
-
-      {/* Tabs */}
-      <div className="max-w-7xl mx-auto px-4 mb-6">
-        <div className="flex gap-4 border-b border-gray-300 mb-8">
-          <button
-            onClick={() => setActiveTab('clasificar')}
-            className={`px-4 py-2 text-sm font-medium border-b-2 ${
-              activeTab === 'clasificar'
-                ? 'border-blue-600 text-blue-700'
-                : 'border-transparent text-gray-500 hover:text-gray-700'
-            }`}
-          >
-            <plus className="w-4 h-4 mr-2" /> Nuevo Reclamo
-          </button>
-          <button
-            onClick={() => setActiveTab('lista')}
-            className={`px-4 py-2 text-sm font-medium border-b-2 ${
-              activeTab === 'lista'
-                ? 'border-blue-600 text-blue-700'
-                : 'border-transparent text-gray-500 hover:text-gray-700'
-            }`}
-          >
-            <list className="w-4 h-4 mr-2" /> Lista de Reclamos
-          </button>
-          <button
-            onClick={() => setActiveTab('asignar')}
-            className={`px-4 py-2 text-sm font-medium border-b-2 ${
-              activeTab === 'asignar'
-                ? 'border-blue-600 text-blue-700'
-                : 'border-transparent text-gray-500 hover:text-gray-700'
-            }`}
-          >
-            <users className="w-4 h-4 mr-2" /> Asignación Óptima
-          </button>
-        </div>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 pb-12">
-        {activeTab === 'clasificar' && (
-          <div className="bg-white rounded-xl shadow-sm p-6">
-            <h2 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
-              <plus className="w-5 h-5 text-blue-600" />
-              Clasificar Nuevo Reclamo
-            </h2>
-            <FormularioReclamo onSubmit={manejarClasificacion} loading={loading} />
-          </div>
-        )}
-
-        {activeTab === 'lista' && (
-          <div className="bg-white rounded-xl shadow-sm p-6">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-lg font-semibold text-gray-800 flex items-center gap-2">
-                <list className="w-5 h-5 text-blue-600" />
-                Historial de Reclamos
-              </h2>
-            </div>
-            <TablaReclamos reclamos={reclamos} />
-          </div>
-        )}
-
-        {activeTab === 'asignar' && (
-          <div className="bg-white rounded-xl shadow-sm p-6">
-            <div className="flex justify-between items-start mb-6">
-              <div>
-                <h2 className="text-lg font-semibold text-gray-800 flex items-center gap-2">
-                  <users className="w-5 h-5 text-blue-600" />
-                  Asignación Óptima por Área
-                </h2>
-                <p className="text-sm text-gray-600 mt-1">
-                  Asigna reclamos a áreas considerando capacidad, SLA y confianza del modelo.
-                </p>
-              </div>
-              <button
-                onClick={manejarAsignacion}
-                disabled={reclamos.length === 0 || loading}
-                className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
-              >
-                {loading ? 'Procesando...' : 'Ejecutar Optimización'}
-              </button>
-            </div>
-
-            {reclamos.length === 0 && (
-              <div className="text-center py-10 text-gray-500">
-                <p>No hay reclamos registrados. Agrega algunos primero.</p>
-              </div>
-            )}
-
-            {asignaciones.length > 0 && (
-              <div className="mt-6">
-                <h3 className="text-sm font-semibold text-gray-700 mb-3">
-                  Asignaciones Realizadas ({asignaciones.length})
-                </h3>
-                <div className="overflow-x-auto">
-                  <table className="w-full text-left border-collapse">
-                    <thead>
-                      <tr className="border-b border-gray-200 bg-gray-50">
-                        <th className="px-4 py-2 text-sm font-semibold text-gray-600">ID</th>
-                        <th className="px-4 py-2 text-sm font-semibold text-gray-600">Área Predicha</th>
-                        <th className="px-4 py-2 text-sm font-semibold text-gray-600">Área Asignada</th>
-                        <th className="px-4 py-2 text-sm font-semibold text-gray-600">Prioridad</th>
-                        <th className="px-4 py-2 text-sm font-semibold text-gray-600">SLA (h)</th>
-                        <th className="px-4 py-2 text-sm font-semibold text-gray-600">Confianza</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {asignaciones.map((a) => (
-                        <tr key={a.id} className="border-b border-gray-100 hover:bg-gray-50">
-                          <td className="px-4 py-2 text-sm text-gray-800 font-mono">{a.id}</td>
-                          <td className="px-4 py-2 text-sm text-gray-700">{a.area_predicha}</td>
-                          <td className="px-4 py-2 text-sm font-medium text-blue-700">
-                            {a.area_asignada}
-                          </td>
-                          <td className="px-4 py-2 text-sm text-gray-700">
-                            <span
-                              className={`px-2 py-1 rounded-full text-xs font-semibold ${
-                                a.prioridad === 'Alta'
-                                  ? 'bg-red-100 text-red-700'
-                                  : a.prioridad === 'Media'
-                                  ? 'bg-yellow-100 text-yellow-700'
-                                  : 'bg-green-100 text-green-700'
-                              }`}
-                            >
-                              {a.prioridad}
-                            </span>
-                          </td>
-                          <td className="px-4 py-2 text-sm text-gray-700">{a.sla_horas}</td>
-                          <td className="px-4 py-2 text-sm text-gray-700">
-                            {(a.probabilidad_confianza * 100).toFixed(0)}%
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            )}
-          </div>
-        )}
-      </div>
-
-      {/* Footer */}
-      <footer className="border-t border-gray-200 bg-white py-4 mt-auto">
-        <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
-          <div className="flex items-center gap-2">
-            <users className="w-4 h-4" />
-            <span>Ingeniería de Sistemas - UMSS</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <calendar className="w-4 h-4" />
-            <span>1° Avance - Clasificación por Optimización</span>
-          </div>
-        </div>
-      </footer>
     </div>
   )
 }

@@ -1,0 +1,928 @@
+{
+  "generado": "2026-11-17T00:01:16",
+  "reclamos_evaluados": 150,
+  "proceso_manual": {
+    "total_horas": 148.9283,
+    "tiempo_promedio_por_reclamo_horas": 0.992855,
+    "detalle": [
+      {
+        "id": "REC-001",
+        "prioridad": "Alta",
+        "tiempo_manual_horas": 2.6046,
+        "error_derivacion": true
+      },
+      {
+        "id": "REC-002",
+        "prioridad": "Media",
+        "tiempo_manual_horas": 0.71,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-003",
+        "prioridad": "Alta",
+        "tiempo_manual_horas": 1.6774,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-004",
+        "prioridad": "Media",
+        "tiempo_manual_horas": 1.9569,
+        "error_derivacion": true
+      },
+      {
+        "id": "REC-005",
+        "prioridad": "Baja",
+        "tiempo_manual_horas": 1.2883,
+        "error_derivacion": true
+      },
+      {
+        "id": "REC-006",
+        "prioridad": "Alta",
+        "tiempo_manual_horas": 1.289,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-007",
+        "prioridad": "Alta",
+        "tiempo_manual_horas": 1.1449,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-008",
+        "prioridad": "Media",
+        "tiempo_manual_horas": 0.86,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-009",
+        "prioridad": "Alta",
+        "tiempo_manual_horas": 1.2903,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-010",
+        "prioridad": "Media",
+        "tiempo_manual_horas": 1.9238,
+        "error_derivacion": true
+      },
+      {
+        "id": "REC-011",
+        "prioridad": "Alta",
+        "tiempo_manual_horas": 1.7294,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-012",
+        "prioridad": "Media",
+        "tiempo_manual_horas": 0.7361,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-013",
+        "prioridad": "Alta",
+        "tiempo_manual_horas": 1.8429,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-014",
+        "prioridad": "Alta",
+        "tiempo_manual_horas": 2.1946,
+        "error_derivacion": true
+      },
+      {
+        "id": "REC-015",
+        "prioridad": "Alta",
+        "tiempo_manual_horas": 1.7606,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-016",
+        "prioridad": "Media",
+        "tiempo_manual_horas": 0.9229,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-017",
+        "prioridad": "Alta",
+        "tiempo_manual_horas": 1.5272,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-018",
+        "prioridad": "Media",
+        "tiempo_manual_horas": 0.7514,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-019",
+        "prioridad": "Alta",
+        "tiempo_manual_horas": 1.7471,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-020",
+        "prioridad": "Baja",
+        "tiempo_manual_horas": 0.3543,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-021",
+        "prioridad": "Alta",
+        "tiempo_manual_horas": 2.6534,
+        "error_derivacion": true
+      },
+      {
+        "id": "REC-022",
+        "prioridad": "Media",
+        "tiempo_manual_horas": 0.6912,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-023",
+        "prioridad": "Media",
+        "tiempo_manual_horas": 0.6319,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-024",
+        "prioridad": "Alta",
+        "tiempo_manual_horas": 1.2008,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-025",
+        "prioridad": "Alta",
+        "tiempo_manual_horas": 1.6018,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-026",
+        "prioridad": "Alta",
+        "tiempo_manual_horas": 1.4026,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-027",
+        "prioridad": "Media",
+        "tiempo_manual_horas": 0.7068,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-028",
+        "prioridad": "Media",
+        "tiempo_manual_horas": 0.8592,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-029",
+        "prioridad": "Alta",
+        "tiempo_manual_horas": 1.2534,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-030",
+        "prioridad": "Baja",
+        "tiempo_manual_horas": 0.2495,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-031",
+        "prioridad": "Alta",
+        "tiempo_manual_horas": 1.8671,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-032",
+        "prioridad": "Baja",
+        "tiempo_manual_horas": 0.3085,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-033",
+        "prioridad": "Alta",
+        "tiempo_manual_horas": 1.7571,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-034",
+        "prioridad": "Media",
+        "tiempo_manual_horas": 1.6916,
+        "error_derivacion": true
+      },
+      {
+        "id": "REC-035",
+        "prioridad": "Alta",
+        "tiempo_manual_horas": 1.3616,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-036",
+        "prioridad": "Media",
+        "tiempo_manual_horas": 0.6844,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-037",
+        "prioridad": "Alta",
+        "tiempo_manual_horas": 1.7823,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-038",
+        "prioridad": "Alta",
+        "tiempo_manual_horas": 1.6166,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-039",
+        "prioridad": "Baja",
+        "tiempo_manual_horas": 0.3622,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-040",
+        "prioridad": "Alta",
+        "tiempo_manual_horas": 1.3237,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-041",
+        "prioridad": "Media",
+        "tiempo_manual_horas": 0.8245,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-042",
+        "prioridad": "Alta",
+        "tiempo_manual_horas": 1.5634,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-043",
+        "prioridad": "Media",
+        "tiempo_manual_horas": 0.7598,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-044",
+        "prioridad": "Media",
+        "tiempo_manual_horas": 0.999,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-045",
+        "prioridad": "Alta",
+        "tiempo_manual_horas": 2.1932,
+        "error_derivacion": true
+      },
+      {
+        "id": "REC-046",
+        "prioridad": "Alta",
+        "tiempo_manual_horas": 1.2072,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-047",
+        "prioridad": "Baja",
+        "tiempo_manual_horas": 0.3438,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-048",
+        "prioridad": "Alta",
+        "tiempo_manual_horas": 1.1726,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-049",
+        "prioridad": "Media",
+        "tiempo_manual_horas": 0.9984,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-050",
+        "prioridad": "Alta",
+        "tiempo_manual_horas": 1.8533,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-051",
+        "prioridad": "Media",
+        "tiempo_manual_horas": 0.6046,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-052",
+        "prioridad": "Alta",
+        "tiempo_manual_horas": 1.6363,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-053",
+        "prioridad": "Media",
+        "tiempo_manual_horas": 0.7067,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-054",
+        "prioridad": "Baja",
+        "tiempo_manual_horas": 0.2417,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-055",
+        "prioridad": "Alta",
+        "tiempo_manual_horas": 1.4653,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-056",
+        "prioridad": "Media",
+        "tiempo_manual_horas": 0.9503,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-057",
+        "prioridad": "Alta",
+        "tiempo_manual_horas": 1.5004,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-058",
+        "prioridad": "Baja",
+        "tiempo_manual_horas": 0.3619,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-059",
+        "prioridad": "Media",
+        "tiempo_manual_horas": 0.7194,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-060",
+        "prioridad": "Media",
+        "tiempo_manual_horas": 0.8436,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-061",
+        "prioridad": "Alta",
+        "tiempo_manual_horas": 1.6969,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-062",
+        "prioridad": "Alta",
+        "tiempo_manual_horas": 1.709,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-063",
+        "prioridad": "Media",
+        "tiempo_manual_horas": 0.6002,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-064",
+        "prioridad": "Baja",
+        "tiempo_manual_horas": 0.2279,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-065",
+        "prioridad": "Alta",
+        "tiempo_manual_horas": 1.784,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-066",
+        "prioridad": "Media",
+        "tiempo_manual_horas": 1.723,
+        "error_derivacion": true
+      },
+      {
+        "id": "REC-067",
+        "prioridad": "Alta",
+        "tiempo_manual_horas": 1.7835,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-068",
+        "prioridad": "Baja",
+        "tiempo_manual_horas": 0.2378,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-069",
+        "prioridad": "Media",
+        "tiempo_manual_horas": 0.6277,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-070",
+        "prioridad": "Media",
+        "tiempo_manual_horas": 0.9063,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-071",
+        "prioridad": "Media",
+        "tiempo_manual_horas": 0.7901,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-072",
+        "prioridad": "Alta",
+        "tiempo_manual_horas": 1.3238,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-073",
+        "prioridad": "Media",
+        "tiempo_manual_horas": 0.7693,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-074",
+        "prioridad": "Alta",
+        "tiempo_manual_horas": 1.5295,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-075",
+        "prioridad": "Baja",
+        "tiempo_manual_horas": 0.2552,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-076",
+        "prioridad": "Alta",
+        "tiempo_manual_horas": 1.8714,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-077",
+        "prioridad": "Baja",
+        "tiempo_manual_horas": 0.2907,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-078",
+        "prioridad": "Alta",
+        "tiempo_manual_horas": 1.2158,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-079",
+        "prioridad": "Media",
+        "tiempo_manual_horas": 0.7352,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-080",
+        "prioridad": "Media",
+        "tiempo_manual_horas": 0.692,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-081",
+        "prioridad": "Baja",
+        "tiempo_manual_horas": 0.2356,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-082",
+        "prioridad": "Alta",
+        "tiempo_manual_horas": 1.2967,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-083",
+        "prioridad": "Alta",
+        "tiempo_manual_horas": 2.7697,
+        "error_derivacion": true
+      },
+      {
+        "id": "REC-084",
+        "prioridad": "Media",
+        "tiempo_manual_horas": 0.6952,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-085",
+        "prioridad": "Media",
+        "tiempo_manual_horas": 0.6857,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-086",
+        "prioridad": "Alta",
+        "tiempo_manual_horas": 1.8266,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-087",
+        "prioridad": "Alta",
+        "tiempo_manual_horas": 1.4795,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-088",
+        "prioridad": "Media",
+        "tiempo_manual_horas": 0.923,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-089",
+        "prioridad": "Baja",
+        "tiempo_manual_horas": 0.2395,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-090",
+        "prioridad": "Media",
+        "tiempo_manual_horas": 0.7694,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-091",
+        "prioridad": "Alta",
+        "tiempo_manual_horas": 1.6718,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-092",
+        "prioridad": "Baja",
+        "tiempo_manual_horas": 1.3726,
+        "error_derivacion": true
+      },
+      {
+        "id": "REC-093",
+        "prioridad": "Media",
+        "tiempo_manual_horas": 0.761,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-094",
+        "prioridad": "Alta",
+        "tiempo_manual_horas": 1.7713,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-095",
+        "prioridad": "Alta",
+        "tiempo_manual_horas": 1.2677,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-096",
+        "prioridad": "Media",
+        "tiempo_manual_horas": 0.7688,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-097",
+        "prioridad": "Alta",
+        "tiempo_manual_horas": 1.3124,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-098",
+        "prioridad": "Baja",
+        "tiempo_manual_horas": 0.2915,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-099",
+        "prioridad": "Alta",
+        "tiempo_manual_horas": 2.5377,
+        "error_derivacion": true
+      },
+      {
+        "id": "REC-100",
+        "prioridad": "Alta",
+        "tiempo_manual_horas": 1.8745,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-101",
+        "prioridad": "Media",
+        "tiempo_manual_horas": 0.9876,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-102",
+        "prioridad": "Alta",
+        "tiempo_manual_horas": 1.7615,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-103",
+        "prioridad": "Baja",
+        "tiempo_manual_horas": 0.2978,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-104",
+        "prioridad": "Baja",
+        "tiempo_manual_horas": 1.2852,
+        "error_derivacion": true
+      },
+      {
+        "id": "REC-105",
+        "prioridad": "Media",
+        "tiempo_manual_horas": 0.7516,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-106",
+        "prioridad": "Media",
+        "tiempo_manual_horas": 0.7061,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-107",
+        "prioridad": "Baja",
+        "tiempo_manual_horas": 0.2933,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-108",
+        "prioridad": "Baja",
+        "tiempo_manual_horas": 0.3686,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-109",
+        "prioridad": "Baja",
+        "tiempo_manual_horas": 0.3084,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-110",
+        "prioridad": "Baja",
+        "tiempo_manual_horas": 0.2482,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-111",
+        "prioridad": "Media",
+        "tiempo_manual_horas": 0.9875,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-112",
+        "prioridad": "Media",
+        "tiempo_manual_horas": 0.8169,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-113",
+        "prioridad": "Media",
+        "tiempo_manual_horas": 0.6229,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-114",
+        "prioridad": "Media",
+        "tiempo_manual_horas": 0.8011,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-115",
+        "prioridad": "Media",
+        "tiempo_manual_horas": 0.663,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-116",
+        "prioridad": "Media",
+        "tiempo_manual_horas": 0.632,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-117",
+        "prioridad": "Media",
+        "tiempo_manual_horas": 0.838,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-118",
+        "prioridad": "Media",
+        "tiempo_manual_horas": 1.6941,
+        "error_derivacion": true
+      },
+      {
+        "id": "REC-119",
+        "prioridad": "Baja",
+        "tiempo_manual_horas": 0.3585,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-120",
+        "prioridad": "Baja",
+        "tiempo_manual_horas": 0.3142,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-121",
+        "prioridad": "Baja",
+        "tiempo_manual_horas": 0.2879,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-122",
+        "prioridad": "Baja",
+        "tiempo_manual_horas": 0.3034,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-123",
+        "prioridad": "Baja",
+        "tiempo_manual_horas": 0.2556,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-124",
+        "prioridad": "Baja",
+        "tiempo_manual_horas": 0.2608,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-125",
+        "prioridad": "Baja",
+        "tiempo_manual_horas": 0.3258,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-126",
+        "prioridad": "Baja",
+        "tiempo_manual_horas": 0.2724,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-127",
+        "prioridad": "Baja",
+        "tiempo_manual_horas": 0.2359,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-128",
+        "prioridad": "Baja",
+        "tiempo_manual_horas": 0.3748,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-129",
+        "prioridad": "Baja",
+        "tiempo_manual_horas": 0.236,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-130",
+        "prioridad": "Baja",
+        "tiempo_manual_horas": 0.2648,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-131",
+        "prioridad": "Baja",
+        "tiempo_manual_horas": 0.3571,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-132",
+        "prioridad": "Baja",
+        "tiempo_manual_horas": 0.2804,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-133",
+        "prioridad": "Baja",
+        "tiempo_manual_horas": 0.3501,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-134",
+        "prioridad": "Baja",
+        "tiempo_manual_horas": 0.3168,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-135",
+        "prioridad": "Baja",
+        "tiempo_manual_horas": 1.3231,
+        "error_derivacion": true
+      },
+      {
+        "id": "REC-136",
+        "prioridad": "Alta",
+        "tiempo_manual_horas": 1.7378,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-137",
+        "prioridad": "Media",
+        "tiempo_manual_horas": 0.8654,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-138",
+        "prioridad": "Media",
+        "tiempo_manual_horas": 1.6537,
+        "error_derivacion": true
+      },
+      {
+        "id": "REC-139",
+        "prioridad": "Media",
+        "tiempo_manual_horas": 0.6428,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-140",
+        "prioridad": "Baja",
+        "tiempo_manual_horas": 0.2659,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-141",
+        "prioridad": "Baja",
+        "tiempo_manual_horas": 0.3326,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-142",
+        "prioridad": "Baja",
+        "tiempo_manual_horas": 0.3201,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-143",
+        "prioridad": "Baja",
+        "tiempo_manual_horas": 0.2983,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-144",
+        "prioridad": "Baja",
+        "tiempo_manual_horas": 1.3519,
+        "error_derivacion": true
+      },
+      {
+        "id": "REC-145",
+        "prioridad": "Baja",
+        "tiempo_manual_horas": 0.2885,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-146",
+        "prioridad": "Baja",
+        "tiempo_manual_horas": 0.2255,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-147",
+        "prioridad": "Baja",
+        "tiempo_manual_horas": 0.3206,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-148",
+        "prioridad": "Baja",
+        "tiempo_manual_horas": 0.3362,
+        "error_derivacion": false
+      },
+      {
+        "id": "REC-149",
+        "prioridad": "Baja",
+        "tiempo_manual_horas": 1.2892,
+        "error_derivacion": true
+      },
+      {
+        "id": "REC-150",
+        "prioridad": "Baja",
+        "tiempo_manual_horas": 0.2363,
+        "error_derivacion": false
+      }
+    ]
+  },
+  "proceso_automatizado": {
+    "total_horas": 0.3,
+    "tiempo_promedio_por_reclamo_horas": 0.002
+  },
+  "impacto": {
+    "ahorro_horas": 148.6283,
+    "porcentaje_ahorro": 99.8,
+    "aceleracion_veces": 496.43
+  },
+  "supuestos": {
+    "tiempo_manual_por_prioridad": {
+      "Alta": 1.5,
+      "Media": 0.8,
+      "Baja": 0.3
+    },
+    "prob_error_manual": 0.12,
+    "tiempo_auto_por_reclamo_horas": 0.002
+  }
+}
