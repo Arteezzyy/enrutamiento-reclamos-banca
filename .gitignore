@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+*.lock
+dist/
+build/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Data/models
+*.csv
+*.pkl
+*.h5
