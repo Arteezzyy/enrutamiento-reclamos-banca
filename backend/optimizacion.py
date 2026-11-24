@@ -113,6 +113,23 @@ class OptimizadorEnrutamiento:
     # ------------------------------------------------------------------
 
     @staticmethod
+    def _variable_binaria(nombre):
+        """Crea una variable binaria con la API de PuLP 2.x/3.x.
+
+        PuLP 4.x elimino ``LpVariable(...)`` (las variables se crean desde el
+        problema con ``prob.add_variable``), por eso requirements.txt fija
+        ``pulp==2.7.0``. Si aun asi se ejecuta con PuLP 4.x, se lanza un error
+        claro en lugar de relajar el modelo a variables continuas.
+        """
+        try:
+            return pulp.LpVariable(nombre, cat="Binary")
+        except TypeError as exc:
+            raise RuntimeError(
+                "La version instalada de PuLP no soporta LpVariable(cat=...). "
+                f"Se requiere pulp==2.7.0 (instalada: {getattr(pulp, '__version__', '?')})."
+            ) from exc
+
+    @staticmethod
     def _probabilidades(reclamo):
         """Devuelve un vector de probabilidades normalizado por area."""
         crudas = reclamo.get("probabilidades_area") or {}
@@ -188,7 +205,7 @@ class OptimizadorEnrutamiento:
 
         problema = pulp.LpProblem("Enrutamiento_Reclamos", pulp.LpMinimize)
         variables = {
-            (i, j): pulp.LpVariable(f"x_{i}_{j}", cat="Binary")
+            (i, j): self._variable_binaria(f"x_{i}_{j}")
             for i in range(demanda)
             for j in range(len(areas))
         }
